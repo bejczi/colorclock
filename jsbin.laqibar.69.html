@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2018 by bejczi (http://jsbin.com/laqibar/69/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="Easy clock shows the time and date. The bacground color is changing.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <title>Color watch</title>
+<style id="jsbin-css">
+* { margin: 0; padding: 0; } /*minden elem margóját és térközeit egyszerre nullázza le*/
+
+html, body {
+  font-family: 'Press Start 2P', cursive;
+  color: #696969;
+}
+#watch {
+  position: relative;
+  top: 50%;
+  bottom:-50%;
+  border-radius: 18px;
+  margin:20px;
+  padding:20px;
+  height:220px;
+  width:400px;
+  background: #bdb76b;
+}
+#cdate {
+  text-align: center;
+  margin:10px;
+  padding:10px;
+}
+#clock {
+  text-align: center;
+  font-size: 40px;
+  margin:20px;
+  padding:20px;
+}
+#alarm {
+  margin:10px;
+  padding:10px;
+  text-align: right;
+}
+</style>
+</head>
+<body>  
+  <div id="watch">
+    <div id="cdate"></div>
+    <div id="clock"></div>
+    <div id="alarm">
+      <i class="far fa-bell"></i>
+      <i class="fas fa-volume-off"></i>
+    </div>
+  </div>
+<script id="jsbin-javascript">
+function colorClock(){
+  var date = new Date();
+  var hours = date.getHours();
+  var minutes=date.getMinutes();
+  var seconds=date.getSeconds();
+  var year = date.getFullYear();
+  var month = date.getMonth();
+  var day = date.getDate();
+  var weekday = date.getDay()-1;
+  var weekdays=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  var hexColor = '#' + seconds + minutes + hours;
+  if (seconds < 10) { 
+    seconds = '0' + seconds;
+  }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  var dateFace=year + '.' + month + '.' + day+'.' + weekdays[weekday];
+  var clockFace= hours + '-'+ minutes + '-' + seconds;
+  document.getElementById('cdate').innerHTML = dateFace;
+  document.getElementById('clock').innerHTML = clockFace;
+  setTimeout(function() {
+    colorClock();
+  }, 1000);
+  //document.getElementById("clock").style.background = 'red';
+  document.body.style.background = hexColor;
+}
+colorClock();
+</script>
+</body>
+</html>
